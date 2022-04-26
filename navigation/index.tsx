@@ -8,6 +8,8 @@ import TestScreen from "../screen/TestScreen";
 
 import { FontAwesome } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import { Text, TouchableHighlight } from "react-native";
+import WorkoutDetailScreen from "../screen/WorkoutDetailScreen";
 
 export default function Navigation() {
     return (
@@ -19,6 +21,12 @@ export default function Navigation() {
 
 const Stack = createNativeStackNavigator();
 
+const Left = ({ onPress }: any) => (
+    <TouchableHighlight onPress={onPress}>
+        <Text>Back</Text>
+    </TouchableHighlight>
+);
+
 function RootNavigator() {
     return (
         <Stack.Navigator>
@@ -26,10 +34,21 @@ function RootNavigator() {
                 name="Root"
                 component={BottomTabNavigator}
                 options={{
-                    headerShown: false
+                    headerShown: false,
                 }}
             />
-            <Stack.Screen name="Test" component={TestScreen} />
+            <Stack.Screen
+                name="WorkoutDetails"
+                component={WorkoutDetailScreen}
+                options={{
+                    headerBackTitle: "",
+                    title: "Workout Info",
+                    headerTitleAlign: "center",
+                    headerTitleStyle: {
+                        fontSize: 18
+                    }
+                }}
+            />
         </Stack.Navigator>
     )
 }
@@ -43,14 +62,15 @@ function BottomTabNavigator() {
                 name="Home"
                 component={HomeScreen}
                 options={{
-                    tabBarIcon: () =><FontAwesome name="home" size={24} color="black" />
+                    tabBarIcon: ({ focused, color, size }) => <FontAwesome name="home" color={color} size={24} />,
+
                 }}
             />
             <BottomTab.Screen
                 name="Planner"
                 component={PlannerScreen}
                 options={{
-                    tabBarIcon: () => <Entypo name="add-to-list" size={24} color="black" />
+                    tabBarIcon: ({ focused, color, size }) => <Entypo name="add-to-list" color={color} size={24} />
                 }}
             />
         </BottomTab.Navigator>
