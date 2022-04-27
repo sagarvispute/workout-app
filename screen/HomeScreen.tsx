@@ -1,22 +1,20 @@
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
-import { Button, FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import WorkoutItem from "../components/WorkoutItem";
-import data from '../data.json';
+import { useWorkouts } from "../hooks/useWorkouts";
 import { Workout } from "../types/data";
 
 export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
-    /* useEffect(() => {
-        console.log("Home screen working");
-    }, []); */
+    const workouts: Workout[] = useWorkouts();
 
     return (
         <View style={styles.container}>
             <Text style={styles.header}>New Workout</Text>
             <FlatList
-                data={data as Array<Workout>}
+                data={workouts}
                 renderItem={({ item }) => {
                     return (
-                        <Pressable onPress={() => navigation.navigate('WorkoutDetails', {slug: item.slug})}>
+                        <Pressable onPress={() => navigation.navigate('WorkoutDetails', { slug: item.slug })}>
                             <WorkoutItem
                                 item={item}
                             />

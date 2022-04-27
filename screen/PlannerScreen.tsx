@@ -1,16 +1,33 @@
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
-import { useEffect } from "react";
-import { Button, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function PlannerScreen({ navigation }: NativeStackHeaderProps) {
-    useEffect(() => {
-        console.log("Planner screen working");
-    }, []);
-
     return (
-        <View>
-            <Text>Planner Screen</Text>
-            <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+        <View style={styles.container}>
+            <Text>Planner screen</Text>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        padding: 15,
+        flex: 1,
+    },
+    header: {
+        fontSize: 20,
+        marginBottom: 15,
+        fontWeight: "bold",
+        fontFamily: "montserrat-extrabold"
+    },
+    sequenceItem: {
+        alignItems: "center"
+    },
+    centerView: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginBottom: 20,
+        marginTop: 20
+    },
+});

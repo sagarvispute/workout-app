@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as Font from 'expo-font';
+import { clearWorkouts, getWorkouts, initWorkouts } from '../storage/workout';
+
 
 export default function useCachedResourses() {
     const [isLoadingComplete, setIsLoadingComplete] = useState(false);
@@ -7,6 +9,7 @@ export default function useCachedResourses() {
     useEffect(() => {
         async function loadResourcesAndDataAsync() {
             try {
+                await initWorkouts();
                 await Font.loadAsync({
                     "montserrat-thin": require("../assets/fonts/Montserrat/Montserrat-Regular.ttf"),
                     "montserrat": require("../assets/fonts/Montserrat/Montserrat-Regular.ttf"),

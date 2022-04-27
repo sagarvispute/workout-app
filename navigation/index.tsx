@@ -4,12 +4,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import HomeScreen from "../screen/HomeScreen";
 import PlannerScreen from "../screen/PlannerScreen";
-import TestScreen from "../screen/TestScreen";
 
 import { FontAwesome } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
-import { Text, TouchableHighlight } from "react-native";
+import { AntDesign } from '@expo/vector-icons';
 import WorkoutDetailScreen from "../screen/WorkoutDetailScreen";
+import ContactScreen from "../screen/ContactScreen";
+import ViewContactScreen from "../screen/ViewContact";
+import EditContactScreen from "../screen/EditContact";
 
 export default function Navigation() {
     return (
@@ -20,12 +22,6 @@ export default function Navigation() {
 }
 
 const Stack = createNativeStackNavigator();
-
-const Left = ({ onPress }: any) => (
-    <TouchableHighlight onPress={onPress}>
-        <Text>Back</Text>
-    </TouchableHighlight>
-);
 
 function RootNavigator() {
     return (
@@ -43,6 +39,30 @@ function RootNavigator() {
                 options={{
                     headerBackTitle: "",
                     title: "Workout Info",
+                    headerTitleAlign: "center",
+                    headerTitleStyle: {
+                        fontSize: 18
+                    }
+                }}
+            />
+            <Stack.Screen
+                name="ViewContact"
+                component={ViewContactScreen}
+                options={{
+                    headerBackTitle: "",
+                    title: "",
+                    headerTitleAlign: "center",
+                    headerTitleStyle: {
+                        fontSize: 18
+                    }
+                }}
+            />
+            <Stack.Screen
+                name="EditContact"
+                component={EditContactScreen}
+                options={{
+                    headerBackTitle: "",
+                    title: "",
                     headerTitleAlign: "center",
                     headerTitleStyle: {
                         fontSize: 18
@@ -71,6 +91,14 @@ function BottomTabNavigator() {
                 component={PlannerScreen}
                 options={{
                     tabBarIcon: ({ focused, color, size }) => <Entypo name="add-to-list" color={color} size={24} />
+                }}
+            />
+            <BottomTab.Screen
+                name="Contact"
+                component={ContactScreen}
+                options={{
+                    tabBarIcon: ({ focused, color, size }) => <AntDesign name="contacts" size={24} color={color} />,
+                    headerShown: false
                 }}
             />
         </BottomTab.Navigator>
